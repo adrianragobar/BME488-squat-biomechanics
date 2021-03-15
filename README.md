@@ -14,6 +14,9 @@ This project is a course requirement for BME 488 Computational Biomechanics.The 
 - Thigh angle: Angle between vertical and thigh at knee
 - Leg angle: Angle between vertical and leg at ankle
 
+## Tests
+Given an individual's body dimensions, does the length of the femur allow the individual to obtain stability when attempting a deep squat
 #### torso_angle.py
-- Given an individual's body dimensions, does the length of the femur allow the individual to obtain stability when attempting a deep squat?
-  - Torso angle was incremented. For each torso angle, femur length was varied and the x coordinate for the centre of mass was calculated and plotted.
+Torso angle was incremented. For each torso angle, femur length was varied and the x coordinate for the centre of mass was calculated and plotted.
+#### ankle_angle.py
+Ankle angle was incremented. For each ankle angle, femur length was varied and the x coordinate for the centre of mass was calculated and plotted.

@@ -45,8 +45,10 @@ class Body:
 
 	def segment_masses(self):
 		"""Calculates masses of segments"""
-		masses = [FOOT_MASS_RATIO,LEG_MASS_RATIO,FEMUR_MASS_RATIO,THN_MASS_RATIO,ARM_MASS_RATIO] * self.body_mass
+		ratios = [FOOT_MASS_RATIO,LEG_MASS_RATIO,FEMUR_MASS_RATIO,THN_MASS_RATIO,ARM_MASS_RATIO]
+		masses = [ratio * self.body_mass for ratio in ratios]
 		masses_dict = dict(zip(segments, masses))
+		print(masses_dict)
 		return masses_dict
 		
 
@@ -89,3 +91,27 @@ class Body:
 		body_com = [sum(df["CoMx*Mass"])/self.body_mass, sum(df['CoMy*Mass'])/self.body_mass]
 		# print("Body CoM: {} metres".format(body_com))
 		return df, body_com
+
+
+	def ankle_loads(df):
+		"""Calculates force and moment at ankle using GRF and weight of foot"""
+
+
+if __name__ == "__main__":
+	body_mass = 62 					# [kilograms]
+	head_neck_length = 0.2286 		# [metres]
+	torso_length = 0.5715 			# [metres]
+	leg_length = 0.381 				# [metres]
+	femur_length = 0.4191	# [metres]
+	arm_length = 0.7366 			# [metres]
+	ankle_height = 0.08				# [metres]
+	foot_length = 0.142				# [metres]
+
+	theta_leg = 38	 			# angle between vertical and leg at ankle [degrees]
+	theta_femur = -95			# angle between vertical femur at knee [degrees]
+	theta_torso = 30 			# angle between vertical and torso at hip [degrees]
+	theta_arm = 0 				# angle between vertical and arm at shoulder [degrees]
+
+	model = Body(body_mass, head_neck_length, torso_length, femur_length, leg_length, arm_length, foot_length, ankle_height)
+	df, body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)
+	print(df)

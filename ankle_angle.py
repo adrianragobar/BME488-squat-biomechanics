@@ -43,11 +43,15 @@ if __name__ == "__main__":
 
 		plt.plot(femur_length_arr, xcom_arr, label='Ankle angle: {} deg'.format(theta_leg))
 
-		theta_leg += 10
+		inc = 10
+		theta_leg += inc
+		# To keep other joint angles constant
+		theta_femur -= inc
+		theta_torso += inc
 
-	# plt.ylim(-0.002, 0.005)
+	plt.ylim(-0.006, 0.006)
 	# plt.xlim(0, 90)
-	plt.plot([measured_femur_length, measured_femur_length], [-0.006, 0.004], linestyle=':', color='black')
+	plt.plot([measured_femur_length, measured_femur_length], [-0.006, 0.006], linestyle=':', color='black')
 	plt.xlabel('Femur length (metres)')
 	plt.ylabel('X CoM (metres)')
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
@@ -57,6 +61,8 @@ if __name__ == "__main__":
 	# X COM CHANGE WITH ANKLE ANGLE
 	fig = plt.figure()
 	fig.suptitle('Change in X CoM With Ankle Angle')
+	theta_torso = 30
+	theta_femur = -95
 	theta_leg = 0
 	xcom_arr = []
 	theta_leg_arr = []
@@ -68,7 +74,11 @@ if __name__ == "__main__":
 
 		xcom = body_com[0]
 		xcom_arr.append(xcom)
-		theta_leg += 1
+		inc = 1
+		theta_leg += inc
+		# To keep other joint angles constant
+		theta_femur -= inc
+		theta_torso += inc
 
 	plt.plot(theta_leg_arr, xcom_arr, color='orange')
 	plt.xlim(0,90)

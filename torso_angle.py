@@ -45,9 +45,9 @@ if __name__ == "__main__":
 
 		theta_torso += 10
 
-	plt.ylim(-0.006, 0.004)
+	plt.ylim(-0.4, 0.3)
 	# plt.xlim(0, 90)
-	plt.plot([measured_femur_length, measured_femur_length], [-0.006, 0.004], linestyle=':', color='black')
+	plt.plot([measured_femur_length, measured_femur_length], [-0.4, 0.3], linestyle=':', color='black')
 	plt.xlabel('Femur length (metres)')
 	plt.ylabel('X CoM (metres)')
 	plt.grid(b=True, which='both', axis='both', linestyle='--')

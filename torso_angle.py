@@ -9,6 +9,8 @@ if __name__ == "__main__":
 	leg_length = 0.381 				# [metres]
 	measured_femur_length = 0.4191	# [metres]
 	arm_length = 0.7366 			# [metres]
+	ankle_height = 0.08				# [metres]
+	foot_length = 0.142				# [metres]
 
 	## JOINT ANGLES
 	## Note: Positive angles are toward the anterior part of the body from the vertical
@@ -27,8 +29,8 @@ if __name__ == "__main__":
 		femur_length = leg_length/2
 
 		while femur_length < torso_length:
-			model = Body(body_mass, head_neck_length, torso_length, femur_length, leg_length, arm_length)
-			body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)
+			model = Body(body_mass, head_neck_length, torso_length, femur_length, leg_length, arm_length, foot_length, ankle_height)
+			__, body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)
 
 			xcom = body_com[0]
 			xcom_arr.append(xcom)
@@ -61,8 +63,8 @@ if __name__ == "__main__":
 
 	while theta_torso < 90:
 		theta_torso_arr.append(theta_torso)
-		model = Body(body_mass, head_neck_length, torso_length, measured_femur_length, leg_length, arm_length)
-		body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)
+		model = Body(body_mass, head_neck_length, torso_length, measured_femur_length, leg_length, arm_length, foot_length, ankle_height)
+		__, body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)
 
 		xcom = body_com[0]
 		xcom_arr.append(xcom)

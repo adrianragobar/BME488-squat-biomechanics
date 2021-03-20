@@ -93,8 +93,38 @@ class Body:
 		return df, body_com
 
 
-	def ankle_loads(df):
-		"""Calculates force and moment at ankle using GRF and weight of foot"""
+	def joint_loads(self, df, body_com, coords=False):
+		"""Calculates force and moment at joint using GRF and segment masses.
+			Positive forces are upward and to the right.
+			Positive moments are anti-clockwise"""
+
+		if not coords:
+			coords = self.joint_coords(theta_leg, theta_femur, theta_torso, theta_arm)
+
+		foot_mass = df.loc["FOOT", "Mass [kg]"]
+		com = [df.loc["FOOT", "CoMx"], df.loc["FOOT", "CoMy"]]
+		Ax = 0
+		Ay = foot_mass*9.81 - self.body_mass
+		M_a = self.body_mass*(body_com[0] - coords["ANKLE"][0]) - foot_mass*9.81*(com[0] - coords["ANKLE"][0])
+
+		leg_mass = df.loc["LEG", "Mass [kg]"]
+		com = [df.loc["LEG", "CoMx"], df.loc["LEG", "Mass [kg]"]]
+		Kx = Ax
+		Ky = Ay + leg_mass*9.81
+		M_k = M_a + Ax*(com[1] - coords["ANKLE"][1]) - Ay*(com[0] - coords["ANKLE"][0]) - leg_mass*9.81*(coords["KNEE"][0] - com[0])
+
+		thigh_mass = df.loc["FEMUR", "Mass [kg]"]
+		com = [df.loc["FEMUR", "CoMx"], df.loc["FEMUR", "CoMy"]]
+		Hx = Kx
+		Hy = Ky + thigh_mass*9.81
+		M_h = M_k + Ky*(coords["KNEE"][0] - coords["HIP"][0]) - Kx*(coords["KNEE"][1] - coords["HIP"][1]) + thigh_mass*9.81*(com[0] - coords["HIP"][0])
+
+		df = pd.DataFrame.from_dict(coords, orient='index', columns=["x [m]", "y [m]"])
+		df["Fx [N]"] = [None, Ax, Kx, Hx, None, None]
+		df["Fy [N]"] = [None, Ay, Ky, Hy, None, None]
+		df["M [Nm]"] = [None, M_a, M_k, M_h, None, None]
+
+		return df
 
 
 if __name__ == "__main__":
@@ -102,7 +132,7 @@ if __name__ == "__main__":
 	head_neck_length = 0.2286 		# [metres]
 	torso_length = 0.5715 			# [metres]
 	leg_length = 0.381 				# [metres]
-	femur_length = 0.4191	# [metres]
+	femur_length = 0.4191			# [metres]
 	arm_length = 0.7366 			# [metres]
 	ankle_height = 0.08				# [metres]
 	foot_length = 0.142				# [metres]
@@ -115,3 +145,9 @@ if __name__ == "__main__":
 	model = Body(body_mass, head_neck_length, torso_length, femur_length, leg_length, arm_length, foot_length, ankle_height)
 	df, body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)
 	print(df)
+
+	# coords = model.joint_coords(theta_leg, theta_femur, theta_torso, theta_arm)
+	# print(coords)
+
+	dfnew = model.joint_loads(df, body_com)
+	print(dfnew)

@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
 	# X COM CHANGES WITH FEMUR LENGTH AND KNEE ANGLE
 	fig = plt.figure()
-	fig.suptitle('Change in X CoM with Femur Length and Knee Angle')
+	fig.suptitle('Change in X CoM with Femur Length and Femur Angle')
 
 	while theta_femur > -180 + theta_leg:
 		xcom_arr = []
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 			print('Femur length: {}'.format(femur_length))
 			print('\txCom = {}'.format(xcom))
 
-		plt.plot(femur_length_arr, xcom_arr, label='Knee angle: {} deg'.format(theta_femur))
+		plt.plot(femur_length_arr, xcom_arr, label='Femur angle: {} deg'.format(theta_femur))
 
 		inc = 10
 		theta_femur -= inc
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
 	# X COM CHANGE WITH KNEE ANGLE
 	fig = plt.figure()
-	fig.suptitle('Change in X CoM With Knee Angle')
+	fig.suptitle('Change in X CoM With Femur Angle')
 	theta_torso = 30
 	theta_femur = 0
 	theta_leg = 38
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
 	plt.plot(theta_femur_arr, xcom_arr, color='orange')
 	plt.xlim(-180 + theta_leg,0)
-	plt.xlabel('Knee angle (deg)')
+	plt.xlabel('Femur angle (deg)')
 	plt.ylabel('X CoM (metres)')
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
 	plt.legend()

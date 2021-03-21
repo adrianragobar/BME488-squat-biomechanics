@@ -23,7 +23,7 @@ if __name__ == "__main__":
 	fig = plt.figure()
 	fig.suptitle('Change in X CoM with Femur Length and Torso Angle')
 
-	while theta_torso < 90:
+	while theta_torso < 180 + theta_femur:
 		xcom_arr = []
 		femur_length_arr = []
 		femur_length = leg_length/2

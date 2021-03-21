@@ -17,7 +17,7 @@ if __name__ == "__main__":
 	theta_leg = 38	 			# angle between vertical and leg at ankle [degrees]
 	theta_femur = -95			# angle between vertical femur at knee [degrees]
 	theta_torso = 30 			# angle between vertical and torso at hip [degrees]
-	theta_arm = 0 				# angle between vertical and arm at shoulder [degrees]
+	theta_arm = 180				# angle between vertical and arm at shoulder [degrees]
 
 	# X COM CHANGES WITH FEMUR LENGTH AND KNEE ANGLE
 	fig = plt.figure()

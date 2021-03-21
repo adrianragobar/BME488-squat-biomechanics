@@ -140,7 +140,7 @@ if __name__ == "__main__":
 	theta_leg = 38	 			# angle between vertical and leg at ankle [degrees]
 	theta_femur = -95			# angle between vertical femur at knee [degrees]
 	theta_torso = 30 			# angle between vertical and torso at hip [degrees]
-	theta_arm = 0 				# angle between vertical and arm at shoulder [degrees]
+	theta_arm = 180				# angle between vertical and arm at shoulder [degrees]
 
 	model = Body(body_mass, head_neck_length, torso_length, femur_length, leg_length, arm_length, foot_length, ankle_height)
 	df, body_com = model.body_com(theta_leg, theta_femur, theta_torso, theta_arm)

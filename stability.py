@@ -104,8 +104,8 @@ class Body:
 		foot_mass = df.loc["FOOT", "Mass [kg]"]
 		com = [df.loc["FOOT", "CoMx"], df.loc["FOOT", "CoMy"]]
 		Ax = 0
-		Ay = foot_mass*9.81 - self.body_mass
-		M_a = self.body_mass*(body_com[0] - coords["ANKLE"][0]) - foot_mass*9.81*(com[0] - coords["ANKLE"][0])
+		Ay = foot_mass*9.81 - self.body_mass*9.81
+		M_a = self.body_mass*9.81*(body_com[0] - coords["ANKLE"][0]) - foot_mass*9.81*(com[0] - coords["ANKLE"][0])
 
 		leg_mass = df.loc["LEG", "Mass [kg]"]
 		com = [df.loc["LEG", "CoMx"], df.loc["LEG", "Mass [kg]"]]

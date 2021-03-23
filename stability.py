@@ -76,11 +76,11 @@ class Body:
 
 		foot_slope_angle =  atan(self.foot_length/self.ankle_height)
 		ankle_meta5 = sqrt(self.foot_length**2 + self.ankle_height**2)
-		com_foot = [coords['ANKLE'][0] + FOOT_RATIO_COM_PROXIMAL*ankle_meta5*sin(foot_slope_angle), coords['ANKLE'][0] - FOOT_RATIO_COM_PROXIMAL*ankle_meta5*cos(foot_slope_angle)]
-		com_leg = [coords['ANKLE'][0] + LEG_RATIO_COM_DISTAL*self.leg_length*sin(theta_leg), coords['ANKLE'][1] + LEG_RATIO_COM_DISTAL*self.leg_length*cos(theta_leg)]
-		com_femur = [coords['KNEE'][0] + FEMUR_RATIO_COM_DISTAL*self.femur_length*sin(theta_femur), coords['KNEE'][1] + FEMUR_RATIO_COM_DISTAL*self.femur_length*cos(theta_femur)]
-		com_thn = [coords['HIP'][0] + THN_RATIO_COM_DISTAL*thn_length*sin(theta_torso), coords['HIP'][1] + THN_RATIO_COM_DISTAL*thn_length*cos(theta_torso)]
-		com_arms = [coords['SHOULDER'][0] + ARM_RATIO_COM_PROXIMAL*self.arm_length*sin(theta_arm), coords['SHOULDER'][1] + ARM_RATIO_COM_PROXIMAL*self.arm_length*cos(theta_arm)]
+		com_foot = [coords['ANKLE'][0] + FOOT_RATIO_COM_PROXIMAL*ankle_meta5*sin(foot_slope_angle*pi/180), coords['ANKLE'][0] - FOOT_RATIO_COM_PROXIMAL*ankle_meta5*cos(foot_slope_angle*pi/180)]
+		com_leg = [coords['ANKLE'][0] + LEG_RATIO_COM_DISTAL*self.leg_length*sin(theta_leg*pi/180), coords['ANKLE'][1] + LEG_RATIO_COM_DISTAL*self.leg_length*cos(theta_leg*pi/180)]
+		com_femur = [coords['KNEE'][0] + FEMUR_RATIO_COM_DISTAL*self.femur_length*sin(theta_femur*pi/180), coords['KNEE'][1] + FEMUR_RATIO_COM_DISTAL*self.femur_length*cos(theta_femur*pi/180)]
+		com_thn = [coords['HIP'][0] + THN_RATIO_COM_DISTAL*thn_length*sin(theta_torso*pi/180), coords['HIP'][1] + THN_RATIO_COM_DISTAL*thn_length*cos(theta_torso*pi/180)]
+		com_arms = [coords['SHOULDER'][0] + ARM_RATIO_COM_PROXIMAL*self.arm_length*sin(theta_arm*pi/180), coords['SHOULDER'][1] + ARM_RATIO_COM_PROXIMAL*self.arm_length*cos(theta_arm*pi/180)]
 
 		df = pd.DataFrame.from_dict(masses, orient='index', columns=["Mass [kg]"])
 		df["CoMx"] = [com_foot[0], com_leg[0], com_femur[0], com_thn[0], com_arms[0]]

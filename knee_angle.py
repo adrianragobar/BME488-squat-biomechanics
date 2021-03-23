@@ -45,16 +45,14 @@ if __name__ == "__main__":
 
 		inc = 10
 		theta_femur -= inc
-		# To keep other joint angles constant
-		theta_torso += inc
 
-	plt.ylim(-0.4, 0.3)
+	plt.ylim(-0.2, 0.3)
 	# plt.xlim(0, 90)
 	plt.plot([measured_femur_length, measured_femur_length], [-0.4, 0.4], linestyle=':', color='black')
 	plt.xlabel('Femur length (metres)', size=20)
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
-	plt.legend()
+	plt.legend(fontsize=17)
 	plt.show()
 
 	# X COM CHANGE WITH KNEE ANGLE
@@ -75,13 +73,11 @@ if __name__ == "__main__":
 		xcom_arr.append(xcom)
 		inc = 1
 		theta_femur -= inc
-		# To keep other joint angles constant
-		theta_torso += inc
 
 	plt.plot(theta_femur_arr, xcom_arr, color='orange')
 	plt.xlim(-180 + theta_leg,0)
 	plt.xlabel('$\\theta_F$ (\xb0)', size=20)
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
-	plt.legend()
+	plt.legend(fontsize=17)
 	plt.show()

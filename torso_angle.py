@@ -45,19 +45,20 @@ if __name__ == "__main__":
 
 		theta_torso += 10
 
-	plt.ylim(-0.4, 0.3)
+	plt.ylim(-0.2, 0.3)
 	# plt.xlim(0, 90)
 	plt.plot([measured_femur_length, measured_femur_length], [-0.4, 0.3], linestyle=':', color='black')
 	plt.xlabel('Femur length (metres)', size=20)
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
-	plt.legend()
+	plt.legend(fontsize=17)
 	plt.show()
 
 	# X COM CHANGE WITH TORSO ANGLE
 	fig = plt.figure()
 	fig.suptitle('Change in $CoM_x$ With Torso Angle', size=30)
 	theta_torso = 0
+	theta_femur = -95
 	xcom_arr = []
 	theta_torso_arr = []
 
@@ -74,5 +75,5 @@ if __name__ == "__main__":
 	plt.xlabel('$\\theta_T$ (\xb0)', size=20)
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
-	plt.legend()
+	# plt.legend(fontsize=17)
 	plt.show()

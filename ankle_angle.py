@@ -79,5 +79,4 @@ if __name__ == "__main__":
 	plt.xlabel('$\\theta_L$ (\xb0)', size=20)
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
-	plt.legend(fontsize=17)
 	plt.show()

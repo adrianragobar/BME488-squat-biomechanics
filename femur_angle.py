@@ -1,5 +1,12 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from stability import Body
+
+def find_nearest(array, value):
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    return idx
+
 
 if __name__ == "__main__":
 
@@ -18,6 +25,7 @@ if __name__ == "__main__":
 	theta_femur = -95			# angle between vertical femur at knee [degrees]
 	theta_torso = 30 			# angle between vertical and torso at hip [degrees]
 	theta_arm = 180				# angle between vertical and arm at shoulder [degrees]
+	theta_femur_chosen = False
 
 	# X COM CHANGES WITH FEMUR LENGTH AND KNEE ANGLE
 	fig = plt.figure()
@@ -43,6 +51,10 @@ if __name__ == "__main__":
 
 		plt.plot(femur_length_arr, xcom_arr, label='$\\theta_F$: {}\xb0'.format(theta_femur))
 
+		idx = find_nearest(femur_length_arr, measured_femur_length)
+		if xcom_arr[idx] > 0 and not theta_femur_chosen:
+			theta_femur_chosen = theta_femur
+
 		inc = 10
 		theta_femur -= inc
 
@@ -53,7 +65,7 @@ if __name__ == "__main__":
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
 	plt.legend(fontsize=17)
-	plt.show()
+	# plt.show()
 
 	# X COM CHANGE WITH KNEE ANGLE
 	fig = plt.figure()
@@ -79,4 +91,13 @@ if __name__ == "__main__":
 	plt.xlabel('$\\theta_F$ (\xb0)', size=20)
 	plt.ylabel('$CoM_x$ (metres)', size=20)
 	plt.grid(b=True, which='both', axis='both', linestyle='--')
-	plt.show()
+	# plt.show()
+
+	model = Body(body_mass, head_neck_length, torso_length, measured_femur_length, leg_length, arm_length, foot_length, ankle_height)
+	df, body_com = model.body_com(theta_leg, theta_femur_chosen, theta_torso, theta_arm)
+	print("Body com: {}".format(body_com))
+	coords = model.joint_coords(theta_leg, theta_femur_chosen, theta_torso, theta_arm)
+	print(coords)
+	dfnew = model.joint_loads(df, body_com, coords)
+	print("$\\theta_F$: {}\xb0".format(theta_femur_chosen))
+	print(dfnew)
